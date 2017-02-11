@@ -1,0 +1,22 @@
+{
+  "name": "twitter-reader",
+  "version": "1.0.0",
+  "description": "Reads twitter and decides if things are FAKE NEWS",
+  "main": "src/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjerue/cnn-is-fake-news.git"
+  },
+  "author": "Ryan Jerue",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjerue/cnn-is-fake-news/issues"
+  },
+  "homepage": "https://github.com/rjerue/cnn-is-fake-news#readme",
+  "dependencies": {
+    "twit": "^2.2.5"
+  }
+}
