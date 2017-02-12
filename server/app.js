@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
 });
 
 app.get('/fake=:url', (req, res) =>{
-
+  twitterTools.twitterQuery(url, res);
 })
 
 app.get('/real=:url', (req, res) =>{

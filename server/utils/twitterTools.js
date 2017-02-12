@@ -1,7 +1,8 @@
-var T = require("../../twitter.js");
+var Tee = require("../../twitter.js");
 
 module.exports = {
     twitterQuery: function(qry, res) {
+        T = Tee.getKey();
         T.get('search/tweets', {
             q: 'qry',
             count: 10
@@ -21,8 +22,8 @@ module.exports = {
             )).filter(function(n) {
                 return n != undefined
             });
-            console.log(data2);
-            res.end(JSON.stringify(data2));
+            //console.log(data2);
+            res.send(data2);
         });
     }
 }
