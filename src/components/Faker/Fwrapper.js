@@ -9,7 +9,8 @@ class Fwrapper extends React.Component {
         super(props);
         this.state = {
             url: "",
-            text: "He's the greatest dancer"
+            text: "He's the greatest dancer",
+            data: ""
         };
     }
 
@@ -21,20 +22,21 @@ class Fwrapper extends React.Component {
         console.log('clicked');
         let me = this;
         var myHeaders = new Headers();
-
-        var myInit = {
-            method: 'GET',
+        myHeaders.append("Content-Type", "application/json");
+        //myHeaders.append("Content-Length", JSON.stringify({url: theUrl}).length.toString());
+        myHeaders.append("X-Custom-Header", "ProcessThisImmediately");
+        console.log(myHeaders);
+        var theUrl = this.state.url
+        console.log('LOOK ', theUrl)
+        fetch('/url/' + me.state.url.replace(/\//g, '_').replace(/-/g, '_'), {
             headers: myHeaders,
-            mode: 'cors',
-            cache: 'default'
-        };
-        fetch('/url/' + me.state.url.replace(/\//g, '_').replace(/-/g, '_'))
-        .then(function(response){
-          return response.json();
-        })
-        .then(function(myJSON){
-          console.log(myJSON);
-          //me.setState({text: myJSON.text});
+            method: 'POST',
+            body: JSON.stringify({url: theUrl})
+        }).then(function(response) {
+            return response.json();
+        }).then(function(myJSON) {
+            console.log(myJSON);
+            me.setState({data: myJSON});
         })
     }
 
@@ -43,8 +45,8 @@ class Fwrapper extends React.Component {
             <div className="container-fluid">
                 <FInput className="row" handleChange={this.handleChange.bind(this)} handleClick={this.handleClick.bind(this)} url={this.state.url}/>
                 <div className="row">
-                    <Result text={this.state.text}/>
-                    <Suggest/>
+                    <Result data={this.state.data}/>
+                    <Suggest data={this.state.data.sug}/>
                 </div>
             </div>
         );
