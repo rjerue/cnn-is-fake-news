@@ -13,7 +13,7 @@ export default class Result extends React.Component {
                     <div className="panel-heading">
                         Results
                     </div>
-                    CNN IS FAKE NEWS!
+                    {this.props.text}
                 </div>
             </div>
         );

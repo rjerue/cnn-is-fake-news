@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const twitterTools = require('./utils/twitterTools');
+const watsonTools = require('./utils/watson')
 const app = express();
 
 // Setup logger
@@ -10,17 +11,26 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
-// Always return the main index.html, so react-router render the route in the client
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+app.get('/url/:url', (req, res) => {
+    console.log(req.params.url.split("_").filter((e, i) => {
+      if(e !== "" && e !== "http:" && e !== "https:" && i <= 6)
+        return e;
+      }));
+    twitterTools.twitterQuery(
+      req.params.url.split("_").filter((e, i) => {
+        if(e !== "" && e !== "http:" && e !== "https:" && i <= 6)
+          return e;
+        }),
+        function(tweets){
+          res.send(tweets);
+        }
+    );
 });
 
-app.get('/fake=:url', (req, res) =>{
-  twitterTools.twitterQuery(url, res);
-})
-
-app.get('/real=:url', (req, res) =>{
-
-})
+app.get('/ha', (req, res) => {
+    res.send({
+        text: 'YES'
+    });
+});
 
 module.exports = app;
