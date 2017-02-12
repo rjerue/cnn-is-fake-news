@@ -1,0 +1,27 @@
+body {
+	background-image: url(http://i.imgur.com/iTocMQT.jpg);
+}
+
+.About {
+	text-align: center;
+	/* background-image: url(http://i.imgur.com/iTocMQT.jpg); */
+        margin: 0;
+        padding: 0;
+}
+
+.HeaderImg {
+	width: 476px;
+        height: 330px;
+}
+
+#top {
+	border-style: solid solid ridge;
+        border-width: 4px;
+        border-color: red;
+}
+
+
+#abouttxt {
+	font-size: 30px;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
